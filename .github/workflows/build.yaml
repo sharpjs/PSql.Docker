@@ -1,0 +1,29 @@
+# GitHub Actions workflow
+# https://help.github.com/en/actions/reference
+
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - release/*
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out
+        uses: actions/checkout@v2
+
+      - name: Build Image
+        run: >
+          docker build
+          --tag sharpjs/psql-mssql:$(date +%Y.%m.%d)
+          --label git.commit=${{ github.sha }}
+          .
