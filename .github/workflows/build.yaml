@@ -25,5 +25,12 @@ jobs:
         run: >
           docker build
           --tag sharpjs/psql-mssql:$(date +%Y.%m.%d)
+          --tag sharpjs/psql-mssql:latest
           --label git.commit=${{ github.sha }}
           .
+
+      - name: Autheneticate Docker Hub
+        run: echo $DOCKER_HUB_TOKEN | docker login --username sharpjs --password-stdin
+          
+      - name: Push Image
+        run: docker push sharpjs/psql-mssql:latest
