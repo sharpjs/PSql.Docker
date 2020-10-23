@@ -8,4 +8,3 @@ RUN apt-get update                                            \
     -c Set-PSRepository PSGallery -InstallationPolicy Trusted \
     \; Install-Module PSql        -AllowPrerelease            \
     \; Install-Module PSql.Deploy -AllowPrerelease
-USER mssql
